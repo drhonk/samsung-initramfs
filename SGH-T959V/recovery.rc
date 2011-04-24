@@ -114,17 +114,21 @@ loglevel 3
     #mount yaffs2 mtd@system /system
     mount rfs /dev/block/stl9 /system check=no
     #mount yaffs2 mtd@system /system ro remount
+    
+    # Added by drhonk
+    chown root root /system
+    chmod 0755 /system
 
 # use movinand second partition as /data. d.moskvitin
     exec apply_disk_policy
 
     # We chown/chmod /data again so because mount is run as root + defaults
     # mount yaffs2 mtd@userdata /data nosuid nodev
-    #mkdir /data
-    #mount rfs /dev/block/stl10 /data nosuid nodev check=no
+    mkdir /data
+    mount rfs /dev/block/stl10 /data nosuid nodev check=no
     #mount rfs /dev/block/mmcblk0p2 /data nosuid nodev check=no
-    #chown system system /data
-    #chmod 0771 /data
+    chown system system /data
+    chmod 0771 /data
 
     ###################################################################    
     # create dbdata partition
@@ -158,9 +162,9 @@ loglevel 3
 
     # Same reason as /data above
     #mount yaffs2 mtd@cache /cache nosuid nodev
-    #mount rfs /dev/block/stl11 /cache nosuid nodev check=no
-    #chown system cache /cache
-    #chmod 0770 /cache
+    mount rfs /dev/block/stl11 /cache nosuid nodev check=no
+    chown system cache /cache
+    chmod 0770 /cache
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
