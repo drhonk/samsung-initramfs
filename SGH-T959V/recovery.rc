@@ -30,7 +30,7 @@ loglevel 3
 #	setprop audioflinger.bootsnd 1
 
 # Backward compatibility
-    symlink /system/etc /etc
+    symlink /res/etc /etc
     symlink /sys/kernel/debug /d
 
 # create mountpoints
@@ -332,9 +332,7 @@ on boot
 #service console /system/bin/sh
 #    console
 
-service recovery /system/bin/recovery
-    console
-    oneshot
+service recovery /res/sbin/recovery_wrapper
 
 on property:persist.service.adb.enable=1
     start adbd
